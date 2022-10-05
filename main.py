@@ -33,7 +33,7 @@ def convert_dates(str_date):
 def create_file(worker, total_num_keys):
     """Creates new csv file and adds the required formats"""
     title = ['Timesheet', '', get_date()]
-    header = ['Name', 'Star Time', 'Finish Time', 'Total Time', 'Break', 'Sick', 'Annual', 'Public Holiday']
+    header = ['Name', 'Star Time', 'Finish Time', 'Break', 'Total Time', 'Project', 'Sick', 'Annual', 'Public Holiday']
 
     # Total pay will be appended to this list and passed to the document.
     total_header = ['Total pay per hour (STD)', 'Total Sick (Paid)', 'Total Sick (Unpaid)', 'Total Annual (Paid)', 'Total Annual (Unpaid)', 'Total Public Holiday']
@@ -87,6 +87,9 @@ def list_to_dict(list_to_dic, reader) -> dict:
 def calculate_totals(email_dic):
     """loops through every user, figures out what each row will be"""
 
+    for key in email_dic:
+        for list_element in email_dic[key]:
+            #Name, Start, Finish, Break, Total(min), Project, Sick, Annual, Public, email, start_num, finish_num]
 
 
 
