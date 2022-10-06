@@ -55,9 +55,6 @@ def create_file(worker, total_num_keys):
 
         return
 
-        # write the data
-        # writer.writerow(data)
-
 
 # Validates file name input
 def file_read_val():
@@ -90,7 +87,6 @@ def calculate_totals(email_dic):
     for key in email_dic:
         for list_element in email_dic[key]:
             #Name, Start, Finish, Break, Total(min), Project, Sick, Annual, Public, email, start_num, finish_num]
-
 
 
 def dict_to_dict(dic_to_dic) -> dict:
@@ -126,15 +122,6 @@ def import_csv():
         email_dic = list_to_dict({}, reader)
 
         return email_dic
-
-
-        # use a for loop for each user; a for loop for each date. (if "email" and "start date" in row_entry_list)
-        # Creates whole data dic with keys == UserEmail
-        # data_dic = {}
-        #
-        # for email in email_set:
-        #
-        # data_dic[row[0].strip('"')]
 
 
 if __name__ == "__main__":
