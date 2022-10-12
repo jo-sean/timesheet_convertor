@@ -71,16 +71,12 @@ def create_file(worker):
                         for k in range(len(calculated_data[i][j])):
                             test = calculated_data[i][j][k]
                             writer.writerow(calculated_data[i][j][k])
-
                     else:
                         writer.writerow(calculated_data[i][j])
-
                 else:
                     writer.writerow(total_header)
                     writer.writerow(calculated_data[i]['total'])
                     break
-
-
         return
 
 
@@ -91,7 +87,6 @@ def file_read_val():
 
     if ".csv" not in " ".join(sys.argv[1:]):
         return False
-
     return True
 
 
@@ -110,12 +105,10 @@ def list_to_dict(list_to_dic, reader) -> dict:
 
 
 def one_day_dic(email_dic, day_flag=True):
-    # [Name-0, Start-1, Finish-2, Break-3, Total(min)-4, Project-5, Sick-6, Annual-7, Public-8, email-9, start_num-10, finish_num-11]
-
-    # if email_dic[3]:
-    #     brake_val = int(email_dic[3]) / 60
-    # else:
-    #     brake_val = 0
+    """Creates a dictionary for a one shift/row"""
+    # email_dic contents
+    # [Name-0, Start-1, Finish-2, Break-3, Total(min)-4, Project-5, Sick-6, Annual-7,
+    # Public-8, email-9, start_num-10, finish_num-11]
     proj = email_dic[5] if 0 else 'No Project'
     day_list = [
         [
@@ -169,6 +162,7 @@ def one_day_dic(email_dic, day_flag=True):
         else:
             totals_list.append(0)
 
+        # Total hours
         count = int(email_dic[4]) / 60
         for num in totals_list:
             count = count - num
@@ -200,37 +194,43 @@ def calculate_totals(email_dic):
         # If there is only one entry for the day, computes directly, else, it will loop through the week.
         if len(email_dic[key]) == 1:
             formatted_data[email_dic[key][0][9]] = {email_dic[key][0][10][:8]: None, 'total': None}
+
             # formatted_data[email_dic[key][0][9]][email_dic[key][0][10][:8]] = one_day_dic(email_dic[key][0])
             formatted_data[email_dic[key][0][9]][email_dic[key][0][10][:8]] = one_day_dic(email_dic[key][0])[0]
             formatted_data[email_dic[key][0][9]]['total'] = one_day_dic(email_dic[key][0])[1]
             continue
 
         else:
-            # [Name-0, Start-1, Finish-2, Break-3, Total(min)-4, Project-5, Sick-6, Annual-7, Public-8, email-9, start_num-10, finish_num-11]
+            # Multiple shifts in a day
             for i in range(len(email_dic[key])):
+
+                # If there is a date with a list, it appends the next row
                 try:
                     formatted_data[email_dic[key][i][9]][email_dic[key][i][10][:8]].append(
                         one_day_dic(email_dic[key][i], False))
-
                 except KeyError:
 
+                    # If not, it first checks to see if there is a dictionary for the date
                     try:
                         isinstance(formatted_data[email_dic[key][i][9]], dict)
 
+                        # If there is a dictionary for the person
                         try:
                             formatted_data[email_dic[key][i][9]][email_dic[key][i][10][:8]]
-
                             formatted_data[email_dic[key][i][9]][email_dic[key][i][10][:8]].append(
                                 one_day_dic(email_dic[key][i], False))
 
+                        # Creates a list for the date
                         except KeyError:
                             formatted_data[email_dic[key][i][9]][email_dic[key][i][10][:8]] = []
 
+                    # creates a dictionary with the first entry and a list for its value
                     except KeyError:
                         formatted_data[email_dic[key][i][9]] = {email_dic[key][i][10][:8]: []}
                         formatted_data[email_dic[key][i][9]][email_dic[key][i][10][:8]].append(
                             one_day_dic(email_dic[key][i], False))
 
+                # Calculates the totals and keeps track in their variables
                 row_list = email_dic[key][i]
                 total_hour = int(row_list[4]) / 60
                 match row_list[6]:
@@ -253,6 +253,7 @@ def calculate_totals(email_dic):
 
                 total_total += total_hour
 
+        # creates a new entry in dic along with the dates called totals with a list of totals
         totals_list = [
             total_sick_paid,
             total_sick_unpaid,
@@ -264,7 +265,6 @@ def calculate_totals(email_dic):
         ]
 
         formatted_data[email_dic[key][i][9]]['total'] = totals_list
-
     return formatted_data
 
 
@@ -287,14 +287,6 @@ def import_csv():
         email_dic = list_to_dict({}, reader)
 
         return email_dic
-
-        # use a for loop for each user; a for loop for each date. (if "email" and "start date" in row_entry_list)
-        # Creates whole data dic with keys == UserEmail
-        # data_dic = {}
-        #
-        # for email in email_set:
-        #
-        # data_dic[row[0].strip('"')]
 
 
 if __name__ == "__main__":
