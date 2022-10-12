@@ -25,22 +25,14 @@ Timesheet		03/10/2022 to 09/10/2022
 								
 Name	         Star Time	        Finish Time   	  Break	    Total Time	         Project	      Sick	  Annual	  Public Holiday
 
-
 USER_EMAIL  
-DATE: MM/DD/YYYY
-
+DATE: DD/MM/YYYY
 Ada Lovelace	6/10/2022 18:06	    6/10/2022 23:59	    1.5	    4.383333333	      Working Bee	       N/A	   N/A	        No
-								
-Total Sick (Paid)	Total Sick (Unpaid)	Total Annual (Paid)	Total Annual (Unpaid)	Total Public Holiday	Total pay per hour (STD)			
-								
+Total Sick (Paid)	Total Sick (Unpaid)	Total Annual (Paid)	Total Annual (Unpaid)	Total Public Holiday	Total pay per hour (STD)
 0	                        0         	           0	              0	                      0	                  4.383333333		
 
-
-DATE: MM/DD/YYYY
-
-Ada Lovelace	6/10/2022 18:06	    6/10/2022 23:59	    1.5	    4.383333333	      Working Bee	       N/A	   N/A	        No
-								
-Total Sick (Paid)	Total Sick (Unpaid)	Total Annual (Paid)	Total Annual (Unpaid)	Total Public Holiday	Total pay per hour (STD)			
-								
+DATE: DD/MM/YYYY
+Ada Lovelace	7/10/2022 18:06	    7/10/2022 23:59	    1.5	    4.383333333	      Working Bee	       N/A	   N/A	        No
+Total Sick (Paid)	Total Sick (Unpaid)	Total Annual (Paid)	Total Annual (Unpaid)	Total Public Holiday	Total pay per hour (STD)
 0	                        0         	           0	              0	                      0	                  4.383333333		
 
