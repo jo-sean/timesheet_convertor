@@ -50,21 +50,23 @@ def create_file(worker):
 
     calculated_data = calculate_totals(worker)
 
-    with open(f'Timesheet_week_of_{monday}.csv', 'w+') as fl:
+    with open(f'Timesheet_week_of_{monday}.csv', 'w+', newline='') as fl:
         writer = csv.writer(fl)
 
         # write the header
         writer.writerow(title)
+        writer.writerow('')
 
         # Loops through names
         for i in calculated_data:
-            writer.writerow(header)
             writer.writerow([i])
+
             # Loops through dates & totals
             for j in calculated_data[i]:
 
                 if j != 'total':
                     writer.writerow([f"Date: {simple_date(j)}"])
+                    writer.writerow(header)
 
                     if isinstance(calculated_data[i][j][0], list):
                         # Loops through shifts
@@ -76,6 +78,7 @@ def create_file(worker):
                 else:
                     writer.writerow(total_header)
                     writer.writerow(calculated_data[i]['total'])
+                    writer.writerow('')
                     break
         return
 
